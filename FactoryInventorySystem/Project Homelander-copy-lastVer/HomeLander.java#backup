@@ -1,0 +1,35 @@
+import java.util.Scanner;
+import java.io.File;
+import java.util.StringTokenizer;
+// kalau addFirst dia gi bawah sekali 
+// add last bawah gi atass sekali
+public class HomeLander {
+    public static void main(String[] args) {
+        LinkedList<Product> productList = new LinkedList<>();
+        LinkedList<Product> originalList = new LinkedList<>();
+
+        File inputFile = new File("Homelander.txt");
+
+        // Baca data dari fail
+        try {
+            Scanner inFile = new Scanner(inputFile);
+            while (inFile.hasNextLine()) {
+                String s = inFile.nextLine();
+                StringTokenizer st = new StringTokenizer(s, ";");
+
+                String productID = st.nextToken();
+                String productName = st.nextToken();
+                int productQuantity = Integer.parseInt(st.nextToken());
+                double productPrice = Double.parseDouble(st.nextToken());
+                String category = st.nextToken();
+
+                Product createProduct = new Product(productID, productName, productQuantity, productPrice,category);
+                productList.addLast(createProduct);
+                originalList.addLast(createProduct); // Simpan salinan asal
+            }
+            inFile.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+}
